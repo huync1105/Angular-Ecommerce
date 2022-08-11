@@ -1,0 +1,35 @@
+<div class="w-full flex flex-col items-center">
+  <h1 class="text-4xl font-bold my-3">Hello bạn!</h1>
+  <p class="my-3 text-center">
+    Đăng nhập vào để dùng đầy đủ chức năng nhé ^^
+  </p>
+  <div class="w-full my-2">
+    <input 
+      class="w-full mb-4"
+      type="text" 
+      pInputText 
+      placeholder="Email đăng nhập"
+      [(ngModel)]="user.email"
+    > 
+    <input 
+      #input
+      class="w-full mb-4" 
+      type="password" 
+      pPassword 
+      placeholder="Mật khẩu"
+      [(ngModel)]="user.password"
+    />
+    <e-signbutton
+      className="bg-signbtn-light-brown text-signbtn-dark-brown"
+      title="Đăng nhập"
+      [isLoading]="isLoading"
+      (handleClick)="login()"
+    ></e-signbutton>
+    <p class="my-2 w-full text-center">Or</p>
+    <e-signbutton
+      className="bg-signbtn-light-green text-signbtn-dark-green"
+      title="Đăng ký"
+      (handleClick)="login()"
+    ></e-signbutton>
+  </div>
+</div>

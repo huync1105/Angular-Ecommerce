@@ -1,0 +1,13 @@
+<div [class]="'w-full ' + className">
+  <button 
+    class="font-bold rounded p-3 w-full"
+    (click)="emitValue()"
+  >
+    <i 
+      *ngIf="isLoading"
+      class="fa-solid fa-spin fa-spinner mr-2"
+    ></i>
+    {{title}}
+  </button> 
+</div>
+
