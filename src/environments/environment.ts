@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  host: `http://localhost:5000/`,
+  // host: `http://localhost:5000/`,
+  host: `https://ecommerce-huy1105.herokuapp.com/`
 };
 
 /*

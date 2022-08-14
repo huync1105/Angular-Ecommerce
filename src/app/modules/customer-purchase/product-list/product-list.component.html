@@ -1,0 +1,88 @@
+<div class="content absolute top-14 w-full flex justify-center">
+  <div 
+    *ngIf="!productList"
+    class="flex items-center"
+  >
+    <p-progressSpinner
+      styleClass="custom-spinner"
+      [style]="{width: '60px', height: '60px'}"
+      strokeWidth="6"
+      animationDuration=".6s"
+    ></p-progressSpinner>
+    <span class="font-semibold ml-2">Đang tải dữ liệu...</span>
+  </div>
+  <div *ngIf="productList" class="container px-5">
+    <div class="flex justify-between items-center py-4">
+      <span class="text-2xl font-semibold">{{productList.name}}</span>
+      <p-dropdown
+        [options]="selections"
+        [(ngModel)]="selectedOption"
+        optionLabel="name"
+        optionValue="code"
+        (onChange)="filter(selectedOption)"
+      ></p-dropdown>
+    </div>
+    <div 
+      *ngIf="productList"
+      class="w-full grid grid-cols-4 sm:grid-cols-4 2xl:grid-cols-12 xl:grid-cols-12 md:grid-cols-8 lg:grid-cols-8 gap-5"
+    >
+      <ng-container *ngFor="let product of productList.listItems">
+        <div class="col-span-2 2xl:col-span-3 xl:col-span-3 lg:col-span-2 md:col-span-4 sm:col-span-2">
+          <div class="w-full h-full flex flex-col relative overflow-hidden bg-white drop-shadow-md cursor-pointer">
+            <div
+              *ngIf="product.sellUpPrice" 
+              class="cr cr-top cr-left cr-sticky cr-red text-lg"
+            >{{countPercent(product.price, product.sellUpPrice)}}%</div>
+            <div 
+              *ngIf="showAddToCartBtn"
+              class="absolute top-2 right-2"
+            >
+              <button 
+                class="p-button-rounded p-button-secondary"
+                pButton 
+                pRipple 
+                type="button" 
+                icon="pi pi-shopping-cart" 
+                (click)="addItemToCart(product)"
+              ></button>
+            </div>
+            <div 
+              class="item-img w-full h-72 2xl:h-72 lg:h-52 sm:h-40 h-40 overflow-hidden mb-4"
+              [style]="{
+                'backgroundImage': 'url(' + product.img + ')',
+                'backgroundPosition': 'top center',
+                'backgroundRepeat': 'no-repeat',
+                'backgroundSize': 'cover'
+              }"
+            ></div>
+            <div class="item-content p-3">
+              <p>{{product.itemName | truncate: 60}}</p>
+              <div class="item-feedback flex items-center my-2">
+                <span>
+                  <p-rating 
+                    [(ngModel)]="product.stars"
+                    [cancel]="false"
+                    [readonly]="true"
+                  ></p-rating>
+                </span>
+                <span class="text-slate-400">- {{product.comments.length}}</span>
+              </div>
+              <div class="item-price flex flex-wrap">
+                <span 
+                  [ngClass]="{
+                    'mr-2 text-md font-bold': true,
+                    'font-semibold text-slate-400 line-through decoration-2': product.sellUpPrice
+                  }"
+                >{{product.price | number: '0.0'}}VND</span>
+                <span 
+                  *ngIf="product.sellUpPrice"
+                  class="text-md font-bold"
+                >{{product.sellUpPrice | number: '0.0'}}VND</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

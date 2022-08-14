@@ -1,0 +1,44 @@
+<div class="w-full relative">
+  <e-navbar
+    class="fixed top-0 left-0 right-0 z-10"
+    [userAvatar]="''"
+    (handleChange)="searchProd($event)"
+    (handleClick)="showSideBar = !showSideBar"
+  ></e-navbar>
+  <p-sidebar 
+    styleClass="bg-own-light-brown"
+    [(visible)]="showSideBar"
+    [showCloseIcon]="false"
+    [blockScroll]="true"
+  >
+    <div class="w-full flex justify-between items-center bg-own-dark-brown px-3 py-2">
+      <span class="text-white text-lg">Hello</span>
+      <button 
+        class="p-button-text p-button-sm"
+        pButton 
+        pRipple 
+        icon="fa-solid fa-xmark text-white"
+        type="button"
+        (click)="showSideBar = false"
+      ></button>
+    </div>
+    <div class="w-full overflow-hidden">
+      <e-sidemenu
+        [categories]="categories"
+        (handleClick)="getProducts($event)"
+      ></e-sidemenu>
+    </div>
+  </p-sidebar>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+  <div 
+    *ngIf="searchValue"
+    class=""
+  >
+    <e-searchmodal
+      [searchValue]="searchValue"
+      (handleClick)="searchValue = ''"
+    ></e-searchmodal>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<div 
+    [ngClass]="{
+      'px-3 h-full': true, 
+      'move-child ': moveToChild}"
+    style="width: 200%"
+>
+  <div class="flex">
+    <div class="w-1/2 pr-3">
+      <ng-container *ngFor="let category of categories">
+        <div class="my-2">
+          <h2 class="text-xl font-semibold py-2">{{category.name}}</h2>
+          <ng-container *ngFor="let child of category.child">
+            <div 
+              class="flex justify-between items-center py-2 px-1 rounded cursor-pointer hover:bg-c-dark-brown/20"
+              (click)="moveToChild = true"
+              (click)="setSubCategories(child)"
+            >
+              <span>{{child.name}}</span>
+              <i class="fa-solid fa-angle-right"></i>
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+      <div class="my-2">
+        <h2 class="text-xl font-semibold py-2">Trợ giúp & Cài đặt</h2>
+        <div 
+          class="flex justify-between items-center py-2 px-1 rounded cursor-pointer hover:bg-c-dark-brown/20"
+          (click)="router.navigate([''])"
+        >
+          <span>Tài khoản của bạn</span>
+        </div>
+        <div 
+          class="flex justify-between items-center py-2 px-1 rounded cursor-pointer hover:bg-c-dark-brown/20"
+          (click)="router.navigate([''])"
+        >
+          <span>Đăng xuất</span>
+        </div>
+      </div>
+    </div>
+    <div class="w-1/2 pl-3 sub-menu">
+      <button 
+          class="p-button-text p-button-secondary my-1"
+          pButton 
+          pRipple 
+          icon="fa-solid fa-arrow-left-long"
+          label="Quay lại"
+          type="button"
+          (click)="moveToChild = false"
+        ></button>
+        <div 
+          class="w-full border border-c-dark-brown/10"
+        ></div>
+        <div class="sub-menu pr-3">
+          <h2 class="text-xl font-semibold py-2">{{subCategories.name}}</h2>
+          <ng-container *ngFor="let child of subCategories.child">
+            <div 
+              class="flex items-center py-2 px-1 rounded cursor-pointer hover:bg-c-dark-brown/20"
+              (click)="emitValue(child._id)"
+            >
+              <span>{{child.name}}</span>
+            </div>
+          </ng-container>
+        </div>
+    </div>
+  </div>
+</div>

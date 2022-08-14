@@ -17,8 +17,8 @@ export class SignbuttonComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  emitValue(e?: any) {
-    if(e) this.handleClick.emit(e);
+  emitValue() {
+    this.handleClick.emit();
   }
 
 }

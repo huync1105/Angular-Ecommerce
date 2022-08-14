@@ -1,0 +1,44 @@
+<div 
+  class="w-full flex justify-center absolute top-14 bg-white drop-shadow-md overflow-auto"
+  style="min-height: 88px; max-height:calc(88px*4)"
+>
+<button 
+class="p-button-rounded p-button-secondary absolute top-2 right-2"
+pButton 
+pRipple 
+type="button" 
+icon="pi pi-times" 
+(click)="emitValue(true)"
+></button>
+<div class="container">
+    <div 
+      *ngIf="!searchResult.length"
+      class="flex items-center mt-2"
+    >
+      <p-progressSpinner
+        styleClass="custom-spinner"
+        [style]="{width: '60px', height: '60px'}"
+        strokeWidth="6"
+        animationDuration=".6s"
+      ></p-progressSpinner>
+      <span class="font-semibold ml-2">Đang tải dữ liệu...</span>
+    </div>
+    <ng-container *ngFor="let item of searchResult">
+      <div class="flex p-3 cursor-pointer hover:bg-slate-200">
+        <div 
+          class="w-16 h-16 mr-3"
+          [style]="{
+            'backgroundImage': 'url(' + item.img + ')',
+            'backgroundPosition': 'top center',
+            'backgroundRepeat': 'no-repeat',
+            'backgroundSize': 'cover'
+          }"
+        ></div>
+        <div>
+          <span>{{item.itemName}}</span>
+          <div class="font-semibold">Giá: {{item.price}}</div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

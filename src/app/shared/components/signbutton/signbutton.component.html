@@ -2,10 +2,11 @@
   <button 
     class="font-bold rounded p-3 w-full"
     (click)="emitValue()"
+    (keypress.enter)="emitValue()"
   >
     <i 
       *ngIf="isLoading"
-      class="fa-solid fa-spin fa-spinner mr-2"
+      class="pi pi-spin pi-sync"
     ></i>
     {{title}}
   </button> 

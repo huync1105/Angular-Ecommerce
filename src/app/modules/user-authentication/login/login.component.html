@@ -10,6 +10,7 @@
       pInputText 
       placeholder="Email đăng nhập"
       [(ngModel)]="user.email"
+      (keyup.enter)="login()"
     > 
     <input 
       #input
@@ -18,6 +19,7 @@
       pPassword 
       placeholder="Mật khẩu"
       [(ngModel)]="user.password"
+      (keyup.enter)="login()"
     />
     <e-signbutton
       className="bg-signbtn-light-brown text-signbtn-dark-brown"
@@ -29,7 +31,7 @@
     <e-signbutton
       className="bg-signbtn-light-green text-signbtn-dark-green"
       title="Đăng ký"
-      (handleClick)="login()"
+      (handleClick)="register()"
     ></e-signbutton>
   </div>
 </div>

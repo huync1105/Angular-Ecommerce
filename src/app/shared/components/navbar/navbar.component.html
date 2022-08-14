@@ -1,0 +1,52 @@
+<div class="navigation sticky z-40 flex justify-center items-center w-full bg-white drop-shadow-md">
+  <div class="container relative px-5">
+    <div class="w-full p-2 grid-cols-4 grid 2xl:grid-cols-12 xl:grid-cols-12 lg:grid-cols-8 md:grid-cols-8 sm:grid-cols-4 gap-5">
+      <div class="flex col-span-4 2xl:col-span-8 xl:col-span-8 lg:col-span-5 md:col-span-5 sm:col-span-4">
+        <button 
+          class="p-button-rounded p-button-text mr-3"
+          pButton 
+          pRipple 
+          type="button" 
+          icon="fa-solid fa-house text-own-dark-brown" 
+          (click)="backToHownTown()"
+        ></button>
+        <button 
+          class="p-button-rounded p-button-text mr-3"
+          pButton 
+          pRipple 
+          type="button" 
+          icon="pi pi-filter-fill text-own-dark-brown"
+          (click)="emitEvent(true)"
+        ></button>
+        <div class="p-inputgroup rounded-3xl overflow-hidden">
+          <span class="p-inputgroup-addon bg-own-light-brown border-0">
+            <i class="pi pi-search"></i>
+          </span>
+          <input 
+            class="bg-own-light-brown border-0"
+            type="text" 
+            pInputText 
+            placeholder="Tìm kiếm"
+            [(ngModel)]="searchText"
+            (ngModelChange)="emitInputValue(searchText)"
+          >         
+        </div>
+      </div>
+      <div class="col-span-4 md:col-span-3 xl:col-span-4 flex justify-end items-center">
+        <p-button 
+          class="mr-4"
+          icon="fa-solid fa-cart-shopping" 
+          label="giỏ hàng"
+          styleClass="p-button-secondary" 
+          [badge]="cartLength.toString()" 
+          badgeClass="p-badge-warning"
+        ></p-button>
+        <p-avatar 
+          class="flex items-center"
+          shape="circle"
+          [image]="userAvatar || 'https://pickaface.net/gallery/avatar/unr_random_160817_0304_2mvqp69.png'"
+        ></p-avatar>
+      </div>
+    </div>
+  </div>
+</div>

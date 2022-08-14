@@ -1,1 +1,51 @@
-<p>register works!</p>
+<div class="w-full flex flex-col items-center">
+  <h1 class="text-4xl font-bold my-3">Đăng ký!</h1>
+  <p class="my-3 text-center">
+    Đăng ký để dùng đầy đủ chức năng nhé ^^
+  </p>
+  <div class="w-full my-2">
+    <input 
+      class="w-full mb-4"
+      type="text" 
+      pInputText 
+      placeholder="Email đăng nhập"
+      [(ngModel)]="user.email"
+      (keyup.enter)="password.focus()"
+    > 
+    <input 
+      #password
+      class="w-full mb-4" 
+      type="password" 
+      pPassword 
+      placeholder="Mật khẩu"
+      [(ngModel)]="user.password"
+      (keyup.enter)="repassword.focus()"
+    />
+    <div class="field w-full mb-4">
+      <input 
+        #repassword
+        [ngClass]="{
+          'w-full': true,
+          'ng-invalid ng-dirty': !isMatch
+        }" 
+        type="password" 
+        pInputText  
+        placeholder="Nhập lại mật khẩu"
+        aria-describedby="username2-help"
+        [(ngModel)]="secondPassword"
+        (keyup.enter)="register()"
+      />
+      <small 
+        *ngIf="!isMatch"
+        id="username2-help" 
+        class="p-error block"
+      >Mật khẩu nhập lại không đúng</small>
+    </div>
+    <e-signbutton
+      className="bg-signbtn-light-green text-signbtn-dark-green"
+      title="Đăng ký"
+      [isLoading]="isLoading"
+      (handleClick)="register()"
+    ></e-signbutton>
+  </div>
+</div>
