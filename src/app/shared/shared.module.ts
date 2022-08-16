@@ -10,6 +10,9 @@ import { FormsModule } from '@angular/forms';
 import { SearchmodalComponent } from './components/searchmodal/searchmodal.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { CartmodalComponent } from './components/cartmodal/cartmodal.component';
+import { FeedbackComponent } from './components/feedback/feedback.component';
+import { RatingModule } from 'primeng/rating';
 
 
 @NgModule({
@@ -18,7 +21,9 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     NavbarComponent,
     SidemenuComponent,
     SearchmodalComponent,
-    TruncatePipe
+    TruncatePipe,
+    CartmodalComponent,
+    FeedbackComponent
   ],
   imports: [
     CommonModule,
@@ -26,14 +31,17 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     InputTextModule,
     ButtonModule,
     AvatarModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    RatingModule
   ],
   exports: [
     SignbuttonComponent,
     NavbarComponent,
     SidemenuComponent,
     SearchmodalComponent,
-    TruncatePipe
+    TruncatePipe,
+    CartmodalComponent,
+    FeedbackComponent
   ]
 })
 export class SharedModule { }

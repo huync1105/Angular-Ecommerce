@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 
 @Component({
@@ -14,10 +16,13 @@ export class NavbarComponent implements OnInit {
   @Input() userAvatar: string = "";
   searchText: any = "";
   cartLength: number = 0;
+  showCartModal: boolean = false;
+  user: User = {};
 
   constructor(
-    private router: Router,
-    private _cartService: CartService
+    public router: Router,
+    private _cartService: CartService,
+    private _authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -25,7 +30,19 @@ export class NavbarComponent implements OnInit {
   }
 
   initData() {
+    this.getUser();
     this.getCart();
+  }
+
+  getUser() {
+    this._authService.currentUser.subscribe(user => {
+      if (!user._id) {
+        this.user = JSON.parse(((localStorage as any).getItem('currentUser')));
+      } else {
+        this.user = user;
+      }
+      
+    })
   }
 
   getCart() {

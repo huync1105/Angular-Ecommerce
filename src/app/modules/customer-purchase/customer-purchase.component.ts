@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { debounce } from "lodash";
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -30,7 +31,8 @@ export class CustomerPurchaseComponent implements OnInit {
   searchValue: string = '';
 
   constructor(
-    private _prodService: ProductsService
+    private _prodService: ProductsService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -57,6 +59,8 @@ export class CustomerPurchaseComponent implements OnInit {
   }
 
   getProducts(id: string) {
+    this.router.navigate(['customer-purchase'])
+    this.showSideBar = false;
     this._prodService.products()
       .getProdsByCatId(id).subscribe((res: any) => {
         this._prodService.productList.next(res.data);

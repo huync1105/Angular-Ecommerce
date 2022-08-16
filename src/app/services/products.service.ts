@@ -29,6 +29,10 @@ export class ProductsService {
       getProdsByKeyword: (data: any) => {
         let url = `${environment.host}products/getByKeyword`;
         return this.http.post(url, data);
+      },
+      getProdById: (id: string) => {
+        let url = `${environment.host}products/getItemById/${id}`;
+        return this.http.get(url);
       }
     }
   }

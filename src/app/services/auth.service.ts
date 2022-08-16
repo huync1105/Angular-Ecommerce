@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
@@ -9,14 +10,14 @@ import { User } from '../models/user.model';
 })
 export class AuthService {
 
-  private currentUserSubject?: BehaviorSubject<User>;
-  public currentUser?: Observable<User>;
+  public currentUserSubject: BehaviorSubject<User>
+  = new BehaviorSubject<User>({});
+  public currentUser: Observable<User>;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router,
   ) { 
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse((localStorage as any).getItem('currentUser')));
-    this.currentUserSubject = new BehaviorSubject<User>({})
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -25,13 +26,10 @@ export class AuthService {
       return this.http.post<User>(authUrl, data).pipe(
         map((res: any) => {
           let user = res.data;
-          localStorage.setItem('token', res.accessToken);
-          localStorage.setItem('currentUser', JSON.stringify({
-            ...user,
-            password: ""
-          }));
-          this.currentUserSubject?.next(user);
-          return user;
+          localStorage.setItem('token', user.token);
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          this.currentUserSubject.next(user);
+          return res;
         })
       );
     }
@@ -43,7 +41,8 @@ export class AuthService {
 
     logout() {
       localStorage.clear();
-      this.currentUserSubject?.next({});
+      this.currentUserSubject.next({});
+      this.router.navigate(['/login'])
     }
 
 }

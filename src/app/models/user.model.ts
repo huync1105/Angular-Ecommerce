@@ -9,7 +9,7 @@ export interface User {
   email?: string;
   password?: string;
   avatar?: string;
-  dateOfBirth?: number;
+  dateOfBirth?: any;
   sex?: string;
   addresses?: any;
 }

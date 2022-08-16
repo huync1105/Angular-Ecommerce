@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { handleResponse } from 'src/app/shared/app-shared-functions';
 
 @Component({
   selector: 'app-login',
@@ -26,10 +27,13 @@ export class LoginComponent implements OnInit {
   login():void {
     this.isLoading = true;
     this._authService.login(this.user)
-    .subscribe(() => {
-      this.isLoading = false;
-      this._toastrService.success('Đăng nhập thành công!')
-      this.router.navigate(['/customer-purchase'])
+    .subscribe((res) => {
+      handleResponse(res, this._toastrService, () => {
+        this.isLoading = false;
+        this.router.navigate(['/customer-purchase'])
+      }, () => {
+        this.isLoading = false;
+      }) 
     })
   }
 

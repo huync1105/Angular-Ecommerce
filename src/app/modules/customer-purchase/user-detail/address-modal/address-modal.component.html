@@ -1,0 +1,65 @@
+<div class="modal-header flex items-center justify-between">
+  <h5 class="m-0">Edit address</h5>
+  <button
+    class="p-button-rounded p-button-secondary p-button-sm"
+    pButton
+    pRipple
+    type="button"
+    icon="pi pi-times"
+    (click)="activeModal.dismiss()"
+  ></button>
+</div>
+<div class="modal-body">
+  <div class="w-full grid grid-cols-12 mb-2 items-center">
+    <div class="col-span-2">
+      <label for="">Nhãn</label>
+    </div>
+    <div class="col-span-10">
+      <input
+        class="w-full"
+        type="text"
+        pInputText
+        [(ngModel)]="address.label"
+      />
+    </div>
+  </div>
+  <div class="w-full grid grid-cols-12 mb-2 items-center">
+    <div class="col-span-2">
+      <label for="">Địa chỉ</label>
+    </div>
+    <div class="col-span-10">
+      <input
+        class="w-full"
+        type="text"
+        pInputText
+        [(ngModel)]="address.address"
+      />
+    </div>
+  </div>
+  <div class="w-full grid grid-cols-12 mb-2 items-center">
+    <div class="col-span-2">
+      <label for="">SĐT</label>
+    </div>
+    <div class="col-span-10">
+      <input
+        class="w-full"
+        type="text"
+        pInputText
+        [(ngModel)]="address.phone"
+      />
+    </div>
+  </div>
+</div>
+<div class="modal-footer flex justify-end items-center">
+  <p-button
+    styleClass="p-button-sm p-button-secondary"
+    label="Đóng"
+    icon="pi pi-times"
+  ></p-button>
+  <p-button
+    styleClass="p-button-sm p-button-success"
+    label="Lưu"
+    icon="pi pi-check"
+    (click)="save()"
+  ></p-button>
+</div>

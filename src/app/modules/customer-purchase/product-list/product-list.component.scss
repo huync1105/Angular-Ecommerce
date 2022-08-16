@@ -41,3 +41,8 @@
 .cr-red       { background-color: #B79175; }
 .cr-orange    { background-color: #e82; }
 .cr-yellow    { background-color: #ec0; }
+
+::ng-deep .p-rating .p-rating-icon {
+  font-size: 0.75rem;
+  margin-left: 0.25rem
+}

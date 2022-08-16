@@ -1,0 +1,39 @@
+<div class="w-96 h-52 overflow-y-auto bg-white drop-shadow-md rounded-md">
+  <div class="w-full bg-c-light-brown justify-end py-1 px-2 font-semibold text-own-dark-brown cursor-pointer">
+    <ng-container *ngFor="let item of cartItems">
+      <div class="w-full flex items-center p-2 hover:bg-c-light-brown/40">
+        <div 
+          class="w-16 h-16 mr-2"
+          [style]="{
+            'backgroundImage': 'url(' + item.img + ')',
+            'backgroundPosition': 'top center',
+            'backgroundRepeat': 'no-repeat',
+            'backgroundSize': 'cover'
+          }"
+        ></div>
+        <div>
+          <p class="mb-2">{{item.itemName | truncate: 30}}</p>
+          <div class="flex items-center w-full">
+            <button 
+              class="p-button-rounded p-button-danger p-button-sm"
+              pButton 
+              pRipple 
+              type="button" 
+              icon="pi pi-minus" 
+              (click)="decreaseItem(item)"
+            ></button>
+            <p class="mx-2">{{item.quantity}}</p>
+            <button 
+              class="p-button-rounded p-button-secondary p-button-sm"
+              pButton 
+              pRipple 
+              type="button" 
+              icon="pi pi-plus" 
+              (click)="increaseItem(item)"
+            ></button>
+          </div>
+        </div>
+      </div>
+    </ng-container> 
+  </div>
+</div>

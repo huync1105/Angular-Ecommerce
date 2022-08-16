@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -9,6 +10,7 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class ProductListComponent implements OnInit {
 
+  @Input() showAddToCartBtn: boolean = true;
   selections = [
     { code: 'NAME', name: 'Tên' },
     { code: 'PRICE', name: 'Giá' },
@@ -16,12 +18,12 @@ export class ProductListComponent implements OnInit {
   ]
   selectedOption: string = ""
   productList: any = [];
-  @Input() showAddToCartBtn: boolean = true;
   cart: any = [];
 
   constructor(
     private _prodService: ProductsService,
-    private _cartService: CartService
+    private _cartService: CartService,
+    public router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -69,7 +71,8 @@ export class ProductListComponent implements OnInit {
     })
   }
 
-  addItemToCart(item: any) {
+  addItemToCart(e: any,item: any) {
+    e.stopPropagation();
     let index = this.cart.findIndex((cartItem: any) => {
       const checkMatchItem = cartItem._id === item._id;
       return checkMatchItem;
@@ -80,6 +83,13 @@ export class ProductListComponent implements OnInit {
       this.cart[index].quantity ++;
     }
     this._cartService.cart.next(this.cart);
+  }
+
+  seeDetail(e: any, id: string) {
+    let newUrlLink = `customer-purchase/products/${id}`;
+    this.router.navigate([newUrlLink], {
+      replaceUrl: true
+    })
   }
   
 }

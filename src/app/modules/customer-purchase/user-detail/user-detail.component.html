@@ -1,0 +1,138 @@
+<div
+  class="w-full flex justify-center 2xl:mt-14 xl:mt-14 lg:mt-14 md:mt-14 sm:mt-28 mt-28"
+>
+  <div
+    class="container grid grid-cols-4 sm:grid-cols-4 2xl:grid-cols-12 xl:grid-cols-12 md:grid-cols-8 lg:grid-cols-8 2xl:px-5 xl:px-5 lg:px-5 md:px-5 sm:px-2 px-2 py-3 2xl:gap-5 xl:gap-5 lg:gap-5 md:gap-5 sm:gap-2 gap-2"
+  >
+    <div class="2xl:col-span-12 xl:col-span-12 lg:col-span-8 md:col-span-8 sm:col-span-4 col-span-4 flex justify-between items-center py-2">
+      <span class="text-2xl font-semibold"> Hồ sơ của tôi </span>
+      <span>
+        <button
+          class="p-button-rounded p-button-secondary drop-shadow-md"
+          pButton
+          pRipple
+          type="button"
+          [icon]="isLoading?'pi pi-spin pi-spinner':'pi pi-check '"
+          label="Lưu"
+          (click)="updateUser()"
+        ></button>
+      </span>
+    </div>
+    <div class="col-span-4 sm:col-span-4 lg:col-span-1 md:col-span-1 2xl:col-span-1 flex justify-center">
+      <div class="relative flex flex-col items-center w-auto">
+        <p-avatar
+          [image]="
+            user.avatar ||
+            'https://i1.sndcdn.com/artworks-000189080723-ez2uad-t500x500.jpg'
+          "
+          styleClass="mr-2"
+          size="xlarge"
+          shape="circle"
+        ></p-avatar>
+        <button
+          class="p-button-info p-button-raised p-button-rounded p-button-sm"
+          [icon]="isUpload?'pi pi-spin pi-spinner':'pi pi-upload'"
+          label="Upload"
+          pButton
+          type="button"
+          (click)="upload.click()"
+        ></button>
+        <input 
+          #upload 
+          class="upload-input" 
+          type="file"
+          (change)="uploadFile($event)" 
+        />
+      </div>
+    </div>
+    <div class="col-span-4 sm:col-span-4 md:col-span-7 lg:col-span-8 xl:col-span-8 2xl:col-span-8 grid grid-cols-2 2xl:gap-5 xl:gap-5 lg:gap-5 md:gap-5 sm:gap-2 gap-2">
+      <div class="2xl:col-span-1 col-span-2 grid grid-cols-4 justify-between items-center">
+        <span class="col-span-1 font-semibold">Tên</span>
+        <span class="col-span-3">
+          <input
+            class="w-full"
+            type="text"
+            pInputText
+            [(ngModel)]="user.name"
+          />
+        </span>
+      </div>
+      <div
+        class="2xl:col-span-1 col-span-2 grid grid-cols-4 justify-between items-center"
+      >
+        <span class="col-span-1 font-semibold">Email</span>
+        <span class="col-span-3">
+          <input
+            class="w-full"
+            type="text"
+            pInputText
+            [(ngModel)]="user.email"
+          />
+        </span>
+      </div>
+      <div class="2xl:col-span-1 col-span-2 grid grid-cols-4 justify-between items-center">
+        <span class="col-span-1 font-semibold">Giới tính</span>
+        <span class="col-span-3">
+          <p-dropdown
+            styleClass="w-full"
+            [options]="sexs"
+            [(ngModel)]="user.sex"
+            optionLabel="name"
+            optionValue="code"
+          ></p-dropdown>
+        </span>
+      </div>
+      <div class="2xl:col-span-1 col-span-2 grid grid-cols-4 justify-between items-center"> 
+        <span class="col-span-1 font-semibold">Ngày sinh</span>
+        <div class="field col-span-3">
+          <p-calendar
+            styleClass="w-full"
+            [(ngModel)]="user.dateOfBirth"
+            dateFormat="dd/mm/yy"
+            [showIcon]="true"
+            icon="pi pi-calendar text-signbtn-dark-brown"
+          ></p-calendar>
+        </div>
+      </div>
+      <div class="2xl:col-span-2 col-span-2">
+        <p-accordion>
+          <p-accordionTab header="Địa chỉ" [selected]="true">
+            <div class="bg-orange-100 pl-3">
+              <ng-container *ngFor="let address of user.addresses; let i = index">
+                <div class="w-full py-2 px-3 border-b border-c-dark-brown/10">
+                  <div class="flex justify-between items-center">
+                    <span class="font-semibold">
+                      {{ address.label }}
+                    </span>
+                    <span class="">
+                      <button
+                        class="p-button-rounded p-button-text"
+                        pButton
+                        pRipple
+                        type="button"
+                        icon="pi pi-pencil"
+                        (click)="editAddress(i)"
+                      ></button>
+                    </span>
+                  </div>
+                  <div class="w-full flex py-1">
+                    <span class="mr-2">
+                      <i class="pi pi-map-marker text-red-600"></i>
+                    </span>
+                    <span>{{address.address}}</span>
+                  </div>
+                  <div class="w-full flex py-1">
+                    <span class="mr-2">
+                      <i class="pi pi-phone text-green-700"></i>
+                    </span>
+                    <span>{{address.phone}}</span>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </p-accordionTab>
+        </p-accordion>
+      </div>
+    </div>
+  </div>
+</div>

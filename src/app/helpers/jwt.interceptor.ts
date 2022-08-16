@@ -16,10 +16,12 @@ export class JwtInterceptor implements HttpInterceptor {
   ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    const url = request.url;
     const token = localStorage.getItem('token');
     const currentUser = this._authService.currentUser;
     const isLoggedIn = currentUser && token;
-    if (isLoggedIn) {
+    const isAuthUrl = url.includes('herokuapp') || url.includes('localhost');
+    if (isLoggedIn && isAuthUrl) {
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`

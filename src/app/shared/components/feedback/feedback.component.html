@@ -1,0 +1,58 @@
+<div class="w-full grid grid-cols-4 sm:grid-cols-4 md:grid-cols-8 lg:grid-cols-12 xl:grid-cols-12 2xl:grid-cols-12 gap-5">
+  <div class="dashboard col-span-4">
+    <div class="flex items-center">
+      <p-rating
+        [(ngModel)]="product.avargeStars"
+        [cancel]="false"
+        [readonly]="true"
+      ></p-rating>
+      <span class=""> - trung bình {{ product.avargeStars }}/5</span>
+    </div>
+    <div class="my-2">
+      <ng-container *ngFor="let progress of progresses">
+        <div class="w-full my-1 flex items-center">
+          <span class="mr-2">{{progress.label}}</span>
+          <span class="relative mr-2">
+            <div class="w-56 h-4 rounded bg-slate-300"></div>
+            <div 
+              class="w-56 h-4 rounded absolute top-0 bg-amber-500"
+              [style]="{
+                'width': progress.percents + '%'
+              }"
+            ></div>
+          </span>
+          <span>{{progress.percents}}%</span>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="customer col-span-4 lg:col-span-8 xl:col-span-8 2xl:col-span-8">
+    <ng-container *ngFor="let comment of product.comments">
+      <div class="mb-6">
+        <div class="w-full flex items-center mb-2">
+          <p-avatar 
+            [image]="comment.user.avatar || 'https://i1.sndcdn.com/artworks-000189080723-ez2uad-t500x500.jpg'" 
+            styleClass="mr-2" 
+            shape="circle"
+          ></p-avatar>
+          <span class="ml-2 font-semibold">{{comment.user.name}}</span>
+        </div>
+        <div class="w-full flex items-center mb-2">
+          <span class="mr-2">
+            <p-rating
+              [(ngModel)]="comment.starts"
+              [cancel]="false"
+              [readonly]="true"
+            ></p-rating>
+          </span>
+          <span class="text-slate-400">
+            Đã đánh giá vào {{comment.created | date: 'dd/MM/yyyy hh:mm a'}}
+          </span>
+        </div>
+        <div class="w-full mb-2">
+          {{comment.content}}
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

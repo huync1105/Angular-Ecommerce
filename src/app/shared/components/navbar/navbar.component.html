@@ -1,6 +1,12 @@
 <div class="navigation sticky z-40 flex justify-center items-center w-full bg-white drop-shadow-md">
-  <div class="container relative px-5">
-    <div class="w-full p-2 grid-cols-4 grid 2xl:grid-cols-12 xl:grid-cols-12 lg:grid-cols-8 md:grid-cols-8 sm:grid-cols-4 gap-5">
+  <div class="container relative 2xl:px-5 xl:px-5 lg:px-5 md:px-5 sm:px-2 px-2">
+    <div
+      *ngIf="showCartModal" 
+      class="absolute top-14 right-5"
+    >
+      <e-cartmodal></e-cartmodal>
+    </div>
+    <div class="w-full p-2 grid-cols-4 grid 2xl:grid-cols-12 xl:grid-cols-12 lg:grid-cols-8 md:grid-cols-8 sm:grid-cols-4 2xl:gap-5 xl:gap-5 lg:gap-5 md:gap-5 sm:gap-2 gap-2">
       <div class="flex col-span-4 2xl:col-span-8 xl:col-span-8 lg:col-span-5 md:col-span-5 sm:col-span-4">
         <button 
           class="p-button-rounded p-button-text mr-3"
@@ -40,11 +46,13 @@
           styleClass="p-button-secondary" 
           [badge]="cartLength.toString()" 
           badgeClass="p-badge-warning"
+          (click)="showCartModal = !showCartModal"
         ></p-button>
         <p-avatar 
           class="flex items-center"
           shape="circle"
-          [image]="userAvatar || 'https://pickaface.net/gallery/avatar/unr_random_160817_0304_2mvqp69.png'"
+          [image]="user.avatar || 'https://i1.sndcdn.com/artworks-000189080723-ez2uad-t500x500.jpg'"
+          (click)="router.navigate(['customer-purchase/user'])"
         ></p-avatar>
       </div>
     </div>
